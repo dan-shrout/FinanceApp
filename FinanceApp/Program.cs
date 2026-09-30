@@ -1,7 +1,14 @@
+using FinanceApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// This connects the local database to the application.
+// The connection string is stored in the appsettings.json file.
+builder.Services.AddDbContext<FinanceAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 var app = builder.Build();
 
